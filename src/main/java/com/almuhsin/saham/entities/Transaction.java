@@ -1,4 +1,4 @@
-package main.java.com.almuhsin.saham.entities;
+package com.almuhsin.saham.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

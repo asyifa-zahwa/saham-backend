@@ -1,7 +1,9 @@
-package main.java.com.almuhsin.saham.repositories;
+package com.almuhsin.saham.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.almuhsin.saham.entities.Biodata;
 
 import java.util.List;
 

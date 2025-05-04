@@ -1,3 +1,5 @@
+package com.almuhsin.saham.entities;
+
 
 import jakarta.persistence.*;
 import lombok.*;
