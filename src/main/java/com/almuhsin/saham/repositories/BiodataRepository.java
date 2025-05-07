@@ -14,4 +14,8 @@ public interface BiodataRepository extends JpaRepository<Biodata, Integer> {
     List<Biodata> findByIsDeletedFalseAndIsActiveTrue();
 
     // Bisa tambahkan custom query jika perlu
+    List<Biodata> findByNameContainingAndIsDeletedFalseAndIsActiveTrue(String name);
+    // cara lihat apakah email sudah ada atau belum pake query
+    boolean existsByEmail(String email);
+
 }
