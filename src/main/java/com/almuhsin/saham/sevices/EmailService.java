@@ -18,13 +18,20 @@ public class EmailService {
     // Kirim OTP ke email
     public void sendOtpEmail(String toEmail, String otp) {
         try {
+            // Buat pesan email
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setTo(toEmail);
-            helper.setSubject("Kode OTP Anda");
-            helper.setText("Kode OTP Anda adalah: <b>" + otp + "</b>", true);
+            helper.setSubject("Kode OTP Pendaftaran Akun Saham");
+            String content = """
+                <p>Kode OTP Anda adalah: <b>%s</b></p>
+                <p>Kode ini berlaku selama 5 menit. Silakan masukkan kode ini untuk menyelesaikan pendaftaran akun Anda.</p>
+                <p>Jika Anda tidak melakukan pendaftaran, abaikan email ini.</p>
+                <p>Terima kasih telah menggunakan layanan kami.</p>
+                """.formatted(otp);
 
+            helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
