@@ -20,7 +20,7 @@ public class Biodata {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String email;
 
     @Column(name = "phone_number")
