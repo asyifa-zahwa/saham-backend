@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.almuhsin.saham.repositories.BiodataRepository;
+import com.almuhsin.saham.repositories.UserRepository;
 import com.almuhsin.saham.util.GenerateOTP;
 
 @Service
@@ -16,6 +17,9 @@ public class VerifEmail {
     private EmailService emailService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private TokenService tokenService;
 
     public String verifEmail(String email, int userID) {
@@ -25,7 +29,7 @@ public class VerifEmail {
             return "Format email tidak valid";
         }
         // Cek apakah email sudah terdaftar di database
-        if (biodataRepository.existsByEmail(email)) {    
+        if (userRepository.isEmailRegistered(email)) {    
             return "Email sudah terdaftar";
         }
         //generate token

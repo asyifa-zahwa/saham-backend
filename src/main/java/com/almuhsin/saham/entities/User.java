@@ -42,7 +42,7 @@ public class User {
     private Integer modifiedBy;
 
     @Column(name = "is_locked", nullable = false)
-    private Boolean isLocked;
+    private Boolean isLocked = false;
 
     @Column(name = "login_attemp", nullable = false)
     private Integer loginAttemp;
@@ -52,6 +52,9 @@ public class User {
 
     @Column(name = "deleted_by")
     private Integer deletedBy;
+
+    @Column(name = "is_email_verified", nullable = false)
+    private Boolean isEmailVerified = false;
 
     @PrePersist
     protected void onCreate() {

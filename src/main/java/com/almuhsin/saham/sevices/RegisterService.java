@@ -53,9 +53,9 @@ public class RegisterService {
                 // if (req.getPhoneNumber() == null || req.getPhoneNumber().isEmpty()) {
                 //     return "Nomor telepon tidak boleh kosong";
                 // }
-                // if (biodataRepository.existsByEmail(req.getEmail())) {  
-                //     return "Email sudah terdaftar";
-                // }
+                if (biodataRepository.existsByEmail(req.getEmail())) {  
+                    return "Email sudah terdaftar";
+                }
                 
                 
                 // 1. Buat Biodata

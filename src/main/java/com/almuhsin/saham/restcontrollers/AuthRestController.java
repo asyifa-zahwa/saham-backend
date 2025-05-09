@@ -23,12 +23,15 @@ public class AuthRestController {
         //System.out.println("Register hit: " + request.get());
         return ResponseEntity.ok(registerService.register(request));
     }
-    @GetMapping("/verify-email/{email}/{userId}")
-    public ResponseEntity<?> verifyEmail(@PathVariable String email, @PathVariable int userId) {
+    @GetMapping("/verify-email")
+    public ResponseEntity<?> verifyEmail(
+            @RequestParam String email,
+            @RequestParam int userId) {
         String result = verifEmailService.verifEmail(email, userId);
         if (result != null) {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok("Token sent to email: " + email);
     }
+
 }
