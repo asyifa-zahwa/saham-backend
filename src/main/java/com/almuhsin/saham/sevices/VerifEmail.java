@@ -35,9 +35,7 @@ public class VerifEmail {
         emailService.sendOtpEmail(email, token);
         
         String tokenFor = "verifEmail";
-        //kalau token sudah ada di database ubah jadi expired
-        //tokenService.isTokenExists(email, tokenFor);
-        //simpan token ke database
+        // Simpan token ke database
         tokenService.saveToken(token, tokenFor, userID);
 
         return null;
@@ -47,7 +45,14 @@ public class VerifEmail {
         // Implementasi untuk memverifikasi token
         // Misalnya, Anda bisa memanggil metode dari TokenService untuk memeriksa token
         // dan mengembalikan respons yang sesuai
-        return null;
+        try {
+            tokenService.verifToken(token, userId, "verifEmail");
+            return "Token valid";
+        } catch (Exception e) {
+            return "Token tidak valid atau sudah kadaluarsa";
+        }
+
+
     }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.almuhsin.saham.dto.RegisterUserRequest;
+import com.almuhsin.saham.dto.VerifyToken;
 import com.almuhsin.saham.sevices.RegisterService;
 import com.almuhsin.saham.sevices.VerifEmail;
 
@@ -34,13 +35,15 @@ public class AuthRestController {
     }
 
     @PostMapping("/verify-token")
-    public ResponseEntity<?> verifyToken(
-            @RequestParam String token,
-            @RequestParam int userId) {
+    public ResponseEntity<?> verifyToken(@RequestBody VerifyToken verifyToken) {
         // Implementasi untuk memverifikasi token
         // Misalnya, Anda bisa memanggil metode dari TokenService untuk memeriksa token
         // dan mengembalikan respons yang sesuai
-        return ResponseEntity.ok("Token verified for user ID: " + userId);
+        String result = verifEmailService.verifyToken(verifyToken.getToken(), verifyToken.getUserId());
+        if (result != null) {
+            return ResponseEntity.badRequest().body(result);
+        }
+        return ResponseEntity.ok(result);
     }
 
 }
