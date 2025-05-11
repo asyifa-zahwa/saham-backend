@@ -5,16 +5,16 @@ import org.springframework.stereotype.Repository;
 
 import com.almuhsin.saham.entities.Biodata;
 
-import java.util.List;
+
 
 @Repository
 public interface BiodataRepository extends JpaRepository<Biodata, Integer> {
 
     // Ambil semua biodata yang aktif dan belum dihapus (soft delete)
-    List<Biodata> findByIsDeletedFalseAndIsActiveTrue();
+    // List<Biodata> findByIsDeletedFalseAndIsActiveTrue();
 
-    // Bisa tambahkan custom query jika perlu
-    List<Biodata> findByNameContainingAndIsDeletedFalseAndIsActiveTrue(String name);
+    // // Bisa tambahkan custom query jika perlu
+    // List<Biodata> findByNameContainingAndIsDeletedFalseAndIsActiveTrue(String name);
     // cara lihat apakah email sudah ada atau belum pake query
     boolean existsByEmail(String email);
 

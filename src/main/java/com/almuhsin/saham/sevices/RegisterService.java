@@ -65,7 +65,6 @@ public class RegisterService {
                 biodata.setPhoneNumber(req.getPhoneNumber());
                 biodata.setAddress(req.getAddress());
                 biodata.setParentName(req.getParentName());
-                biodata.setIsActive(true);
                 biodata.setIsDeleted(false);
                 biodata.setCreatedAt(LocalDateTime.now());
                 biodata.setModifiedAt(LocalDateTime.now());

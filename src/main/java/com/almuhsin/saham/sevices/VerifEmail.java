@@ -3,15 +3,12 @@ package com.almuhsin.saham.sevices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.almuhsin.saham.repositories.BiodataRepository;
+
 import com.almuhsin.saham.repositories.UserRepository;
 import com.almuhsin.saham.util.GenerateOTP;
 
 @Service
 public class VerifEmail {
-    
-    @Autowired
-    private BiodataRepository biodataRepository;
 
     @Autowired
     private EmailService emailService;
@@ -36,11 +33,21 @@ public class VerifEmail {
         String token = GenerateOTP.generateOTP(6);
         // kirim token ke email
         emailService.sendOtpEmail(email, token);
-        //ganti token jadi int
-        int tokenInt = Integer.parseInt(token);
+        
+        String tokenFor = "verifEmail";
+        //kalau token sudah ada di database ubah jadi expired
+        //tokenService.isTokenExists(email, tokenFor);
         //simpan token ke database
-        tokenService.saveToken(tokenInt, "verifEmail", userID);
+        tokenService.saveToken(token, tokenFor, userID);
 
         return null;
     }
+
+    public String verifyToken(String token, int userId) {
+        // Implementasi untuk memverifikasi token
+        // Misalnya, Anda bisa memanggil metode dari TokenService untuk memeriksa token
+        // dan mengembalikan respons yang sesuai
+        return null;
+    }
+
 }

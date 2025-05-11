@@ -20,8 +20,8 @@ public class MToken {
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    @Column(nullable = false)
-    private Integer token;
+   @Column(nullable = false, length = 6)
+    private String token; // contoh: "123456"
 
     @Column(name = "token_for", nullable = false)
     private String tokenFor;
@@ -29,29 +29,21 @@ public class MToken {
     @Column(name = "expired_at", nullable = false)
     private LocalDateTime expiredAt;
 
+    @Column(name = "is_used", nullable = false)
+    private Boolean isUsed = false;
+
+    @Column(name = "used_at")
+    private LocalDateTime usedAt;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "created_by", nullable = false)
-    private Integer createdBy;
-
-    @Column(name = "modified_at", nullable = false)
-    private LocalDateTime modifiedAt;
-
-    @Column(name = "modified_by", nullable = false)
-    private Integer modifiedBy;
-
-    @Column(name = "is_expired", nullable = false)
-    private Boolean isExpired;
-
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        modifiedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        modifiedAt = LocalDateTime.now();
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(this.expiredAt);
     }
 }

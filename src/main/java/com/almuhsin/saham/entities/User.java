@@ -56,6 +56,12 @@ public class User {
     @Column(name = "is_email_verified", nullable = false)
     private Boolean isEmailVerified = false;
 
+    @Column(name = "must_change_password", nullable = false)
+    private Boolean mustChangePassword = true; // default true untuk akun baru buatan admin
+    
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

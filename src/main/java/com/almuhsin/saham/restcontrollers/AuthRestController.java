@@ -20,7 +20,6 @@ public class AuthRestController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest request) {
-        //System.out.println("Register hit: " + request.get());
         return ResponseEntity.ok(registerService.register(request));
     }
     @GetMapping("/verify-email")
@@ -32,6 +31,16 @@ public class AuthRestController {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok("Token sent to email: " + email);
+    }
+
+    @PostMapping("/verify-token")
+    public ResponseEntity<?> verifyToken(
+            @RequestParam String token,
+            @RequestParam int userId) {
+        // Implementasi untuk memverifikasi token
+        // Misalnya, Anda bisa memanggil metode dari TokenService untuk memeriksa token
+        // dan mengembalikan respons yang sesuai
+        return ResponseEntity.ok("Token verified for user ID: " + userId);
     }
 
 }

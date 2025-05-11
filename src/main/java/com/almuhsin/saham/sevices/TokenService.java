@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.almuhsin.saham.entities.MToken;
+import com.almuhsin.saham.entities.User;
 import com.almuhsin.saham.repositories.TokenRepository;
 
 @Service
@@ -13,18 +14,16 @@ public class TokenService {
     @Autowired
     private TokenRepository tokenRepository;
     
-    public void saveToken(int token, String usedFor, int userId) {
+    public void saveToken(String token, String usedFor, int userId) {
         // Implementasi untuk menyimpan token ke database
+        User user = new User();
+        user.setId(userId); // Set user ID sesuai dengan yang diterima
+
         MToken tokenEntity = new MToken();
         tokenEntity.setToken(token);
         tokenEntity.setTokenFor(usedFor);
         tokenEntity.setExpiredAt(LocalDateTime.now().plusMinutes(5)); // Set expired time 5 menit dari sekarang
-        tokenEntity.setCreatedAt(LocalDateTime.now());
-        tokenEntity.setCreatedBy(userId);
-        tokenEntity.setModifiedAt(LocalDateTime.now());
-        tokenEntity.setModifiedBy(userId);
-        tokenEntity.setIsExpired(false);
-        tokenEntity.setUser(null); // Set user ke null karena belum ada user yang terdaftar
+        tokenEntity.setUser(user); // Set user ke null karena belum ada user yang terdaftar
         tokenRepository.save(tokenEntity);
 
     }
