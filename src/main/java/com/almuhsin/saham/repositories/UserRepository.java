@@ -1,5 +1,7 @@
 package com.almuhsin.saham.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
        "JOIN u.biodata b " +
        "WHERE b.email = :email AND u.isEmailVerified = true")
     boolean isEmailRegistered(@Param("email") String email);
+
+    Optional<User> findByUsername(String username);
+    Optional<User> findByBiodataEmail(String email);
+    Optional<User> findByBiodataEmailAndIsEmailVerifiedTrue(String email);
 
 
 }

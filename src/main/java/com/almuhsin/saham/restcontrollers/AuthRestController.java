@@ -1,11 +1,15 @@
 package com.almuhsin.saham.restcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.almuhsin.saham.dto.LoginRequest;
+import com.almuhsin.saham.dto.LoginResponse;
 import com.almuhsin.saham.dto.RegisterUserRequest;
 import com.almuhsin.saham.dto.VerifyToken;
+import com.almuhsin.saham.sevices.AuthService;
 import com.almuhsin.saham.sevices.RegisterService;
 import com.almuhsin.saham.sevices.VerifEmail;
 
@@ -18,6 +22,9 @@ public class AuthRestController {
 
     @Autowired
     private VerifEmail verifEmailService;
+
+    @Autowired
+    private AuthService authService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest request) {
@@ -44,6 +51,16 @@ public class AuthRestController {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            LoginResponse response = authService.login(request);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
     }
 
 }
