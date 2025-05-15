@@ -30,7 +30,7 @@ public class AuthService {
             throw new RuntimeException("Password salah");
         }
 
-        String token = jwtUtil.generateToken(user);
+        String token = jwtUtil.generateToken(user.getUsername());
         return new LoginResponse(token, user.getUsername(), user.getRole());
     }
 }
